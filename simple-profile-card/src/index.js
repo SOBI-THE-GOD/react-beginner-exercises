@@ -1,6 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./App.css";
+
+const skills = [
+    { name: "HTML", level: "advance", bColor: "orange" },
+    { name: "JavasScript", level: "advance", bColor: "yellow" },
+    { name: "Git , GitHub", level: "advance", bColor: "#939393" },
+    { name: "SCSS", level: "advance", bColor: "#ff45e6" },
+    { name: "React", level: "intermediate", bColor: "aqua" },
+    { name: "Web Design", level: "intermediate", bColor: "#86FF9F" },
+    { name: "Svelte", level: "beginner", bColor: "#935EFF" },
+    { name: "CPP", level: "beginner", bColor: "#646AFF" },
+];
+
 function ProfileCard() {
     return (
         <div className="profile-card__container">
@@ -47,25 +59,25 @@ function About() {
 function Footer() {
     return (
         <footer className="footer">
-            <Technology name="HTML 💪" bColor="orange" />
-            <Technology name="JavasScript 💪" bColor="yellow" />
-            <Technology name="Git , GitHub 💪" bColor="#939393" />
-            <Technology name="React 💪" bColor="aqua" />
-            <Technology name="SCSS 💪" bColor="#ff45e6" />
-            <Technology name="Web Design 💪" bColor="#86FF9F" />
-            <Technology name="Svelte 💪" bColor="#935EFF" />
-            <Technology name="CPP 💪" bColor="#646AFF" />
+            {skills.map((skill) => {
+                return <Technology skill={skill} key={skill.name} />;
+            })}
         </footer>
     );
 }
 
-function Technology(props) {
+function Technology({ skill }) {
     return (
         <span
             className="technology-box"
-            style={{ backgroundColor: props.bColor }}
+            style={{ backgroundColor: skill.bColor }}
         >
-            {props.name}
+            {skill.name +
+                (skill.level === "beginner"
+                    ? " 🥉"
+                    : skill.level === "intermediate"
+                    ? " 🥈"
+                    : " 🥇")}
         </span>
     );
 }
